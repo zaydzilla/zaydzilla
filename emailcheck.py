@@ -20,7 +20,7 @@ def send_email(subject, body, to_email, from_email, smtp_server, smtp_port, logi
         server.quit()
         print("Email sent successfully.")
     except Exception as e:
-        print(f"Error sending email: {e}")
+        print(f"Er{e}")
 # Function to check the price
 def check_price():
     url = "https://doorway-api.knockrentals.com/v1/property/2019943/units"
@@ -33,7 +33,7 @@ def check_price():
         # Check each unit for the desired displayPrice
         for unit in units:
             if unit.get("displayPrice") == "2475":
-                print("Match found! Sending email...")
+                print("OK")
                 # Email details
                 send_email(
                     subject="Apartment Available at $2675",
@@ -46,9 +46,9 @@ def check_price():
                     password="a60c03a354737bc915b2cdf97eb13d6e"  # Replace with sender email's password
                 )
                 return
-        print("No match found.")
+        print("No")
     except Exception as e:
-        print(f"Error fetching data: {e}")
+        print(f"Er{e}")
 # Run the script every 3 hours
 while True:
     check_price()
