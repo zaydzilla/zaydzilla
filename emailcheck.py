@@ -18,7 +18,7 @@ def send_email(subject, body, to_email, from_email, smtp_server, smtp_port, logi
         server.login(login, password)
         server.sendmail(from_email, to_email, msg.as_string())
         server.quit()
-        print("Email sent successfully.")
+        print("OK")
     except Exception as e:
         print(f"Er{e}")
 # Function to check the price
