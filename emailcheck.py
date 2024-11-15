@@ -3,6 +3,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from time import sleep
+
 # Function to send email
 def send_email(subject, body, to_email, from_email, smtp_server, smtp_port, login, password):
     try:
@@ -18,9 +19,9 @@ def send_email(subject, body, to_email, from_email, smtp_server, smtp_port, logi
         server.login(login, password)
         server.sendmail(from_email, to_email, msg.as_string())
         server.quit()
-        print("OK")
-    except Exception as e:
-        print(f"Er{e}")
+    except:
+        pass  # Suppress all errors silently
+
 # Function to check the price
 def check_price():
     url = "https://doorway-api.knockrentals.com/v1/property/2019943/units"
@@ -33,22 +34,21 @@ def check_price():
         # Check each unit for the desired displayPrice
         for unit in units:
             if unit.get("displayPrice") == "2475":
-                print("OK")
                 # Email details
                 send_email(
                     subject="Apartment Available at $2675",
                     body="An apartment with a display price of $2675 is now available.",
-                    to_email="testzaitsev@gmail.com", # Replace with your email
-                    from_email="testzaitsev@gmail.com", # Replace with sender email
-                    smtp_server="in-v3.mailjet.com", # Replace with your SMTP server
+                    to_email="testzaitsev@gmail.com",  # Replace with your email
+                    from_email="testzaitsev@gmail.com",  # Replace with sender email
+                    smtp_server="in-v3.mailjet.com",  # Replace with your SMTP server
                     smtp_port=587,
-                    login="d68ef74d8a8539b32c565120cc66156d", # Replace with sender email
+                    login="d68ef74d8a8539b32c565120cc66156d",  # Replace with sender email
                     password="a60c03a354737bc915b2cdf97eb13d6e"  # Replace with sender email's password
                 )
                 return
-        print("No")
-    except Exception as e:
-        print(f"Er{e}")
+    except:
+        pass  # Suppress all errors silently
+
 # Run the script every 3 hours
 while True:
     check_price()
